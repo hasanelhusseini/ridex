@@ -1,0 +1,834 @@
+# Import necessary libraries
+import pandas as pd
+import numpy as np
+import random
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.preprocessing import MinMaxScaler
+import matplotlib.pyplot as plt
+
+# Seed for reproducibility
+random.seed(42)
+
+# Utility functions for data generation and visualization
+def generate_synthetic_data(num_users=100, num_cars=50, max_rating=5):
+    """
+    Generate synthetic car rental data for the recommender system.
+    :param num_users: Number of users
+    :param num_cars: Number of cars
+    :param max_rating: Maximum rating a user can give
+    :return: DataFrame of synthetic data
+    """
+    data = {
+        "user_id": np.random.randint(1, num_users + 1, size=500),
+        "car_id": np.random.randint(101, 101 + num_cars, size=500),
+        "rating": np.random.randint(1, max_rating + 1, size=500)
+    }
+    return pd.DataFrame(data)
+
+# Generate synthetic data
+df = generate_synthetic_data()
+
+def preprocess_data(df):
+    """
+    Preprocess the data for the recommendation system.
+    - Handle missing values.
+    - Normalize ratings.
+
+    :param df: DataFrame containing the raw data
+    :return: Preprocessed user-item matrix
+    """
+    # Create user-item matrix
+    user_item_matrix = df.pivot(index="user_id", columns="car_id", values="rating").fillna(0)
+    return user_item_matrix
+
+# Preprocess the data
+user_item_matrix = preprocess_data(df)
+
+
+
+
+
+
+
+
+def visualize_data_distribution(df):
+    """
+    Visualize data distribution: number of ratings per user and car.
+    :param df: DataFrame containing the raw data
+    """
+    user_counts = df["user_id"].value_counts()
+    car_counts = df["car_id"].value_counts()
+
+    # Plot user ratings distribution
+    plt.figure(figsize=(10, 5))
+    plt.hist(user_counts, bins=20, color='blue', alpha=0.7, label="Ratings per user")
+    plt.xlabel("Number of Ratings")
+    plt.ylabel("Frequency")
+    plt.title("Distribution of Ratings per User")
+    plt.legend()
+    plt.show()
+
+    # Plot car ratings distribution
+    plt.figure(figsize=(10, 5))
+    plt.hist(car_counts, bins=20, color='green', alpha=0.7, label="Ratings per car")
+    plt.xlabel("Number of Ratings")
+    plt.ylabel("Frequency")
+    plt.title("Distribution of Ratings per Car")
+    plt.legend()
+    plt.show()
+
+# Visualize the data
+visualize_data_distribution(df)
+
+
+def visualize_data_distribution(df):
+    """
+    Visualize data distribution: number of ratings per user and car.
+    :param df: DataFrame containing the raw data
+    """
+    user_counts = df["user_id"].value_counts()
+    car_counts = df["car_id"].value_counts()
+
+    # Plot user ratings distribution
+    plt.figure(figsize=(10, 5))
+    plt.hist(user_counts, bins=20, color='blue', alpha=0.7, label="Ratings per user")
+    plt.xlabel("Number of Ratings")
+    plt.ylabel("Frequency")
+    plt.title("Distribution of Ratings per User")
+    plt.legend()
+    plt.show()
+
+    # Plot car ratings distribution
+    plt.figure(figsize=(10, 5))
+    plt.hist(car_counts, bins=20, color='green', alpha=0.7, label="Ratings per car")
+    plt.xlabel("Number of Ratings")
+    plt.ylabel("Frequency")
+    plt.title("Distribution of Ratings per Car")
+    plt.legend()
+    plt.show()
+
+# Visualize the data
+visualize_data_distribution(df)
+def visualize_data_distribution(df):
+    """
+    Visualize data distribution: number of ratings per user and car.
+    :param df: DataFrame containing the raw data
+    """
+    user_counts = df["user_id"].value_counts()
+    car_counts = df["car_id"].value_counts()
+
+    # Plot user ratings distribution
+    plt.figure(figsize=(10, 5))
+    plt.hist(user_counts, bins=20, color='blue', alpha=0.7, label="Ratings per user")
+    plt.xlabel("Number of Ratings")
+    plt.ylabel("Frequency")
+    plt.title("Distribution of Ratings per User")
+    plt.legend()
+    plt.show()
+
+    # Plot car ratings distribution
+    plt.figure(figsize=(10, 5))
+    plt.hist(car_counts, bins=20, color='green', alpha=0.7, label="Ratings per car")
+    plt.xlabel("Number of Ratings")
+    plt.ylabel("Frequency")
+    plt.title("Distribution of Ratings per Car")
+    plt.legend()
+    plt.show()
+
+# Visualize the data
+visualize_data_distribution(df)
+def visualize_data_distribution(df):
+    """
+    Visualize data distribution: number of ratings per user and car.
+    :param df: DataFrame containing the raw data
+    """
+    user_counts = df["user_id"].value_counts()
+    car_counts = df["car_id"].value_counts()
+
+    # Plot user ratings distribution
+    plt.figure(figsize=(10, 5))
+    plt.hist(user_counts, bins=20, color='blue', alpha=0.7, label="Ratings per user")
+    plt.xlabel("Number of Ratings")
+    plt.ylabel("Frequency")
+    plt.title("Distribution of Ratings per User")
+    plt.legend()
+    plt.show()
+
+    # Plot car ratings distribution
+    plt.figure(figsize=(10, 5))
+    plt.hist(car_counts, bins=20, color='green', alpha=0.7, label="Ratings per car")
+    plt.xlabel("Number of Ratings")
+    plt.ylabel("Frequency")
+    plt.title("Distribution of Ratings per Car")
+    plt.legend()
+    plt.show()
+
+# Visualize the data
+visualize_data_distribution(df)
+def visualize_data_distribution(df):
+    """
+    Visualize data distribution: number of ratings per user and car.
+    :param df: DataFrame containing the raw data
+    """
+    user_counts = df["user_id"].value_counts()
+    car_counts = df["car_id"].value_counts()
+
+    # Plot user ratings distribution
+    plt.figure(figsize=(10, 5))
+    plt.hist(user_counts, bins=20, color='blue', alpha=0.7, label="Ratings per user")
+    plt.xlabel("Number of Ratings")
+    plt.ylabel("Frequency")
+    plt.title("Distribution of Ratings per User")
+    plt.legend()
+    plt.show()
+
+    # Plot car ratings distribution
+    plt.figure(figsize=(10, 5))
+    plt.hist(car_counts, bins=20, color='green', alpha=0.7, label="Ratings per car")
+    plt.xlabel("Number of Ratings")
+    plt.ylabel("Frequency")
+    plt.title("Distribution of Ratings per Car")
+    plt.legend()
+    plt.show()
+
+# Visualize the data
+visualize_data_distribution(df)
+def visualize_data_distribution(df):
+    """
+    Visualize data distribution: number of ratings per user and car.
+    :param df: DataFrame containing the raw data
+    """
+    user_counts = df["user_id"].value_counts()
+    car_counts = df["car_id"].value_counts()
+
+    # Plot user ratings distribution
+    plt.figure(figsize=(10, 5))
+    plt.hist(user_counts, bins=20, color='blue', alpha=0.7, label="Ratings per user")
+    plt.xlabel("Number of Ratings")
+    plt.ylabel("Frequency")
+    plt.title("Distribution of Ratings per User")
+    plt.legend()
+    plt.show()
+
+    # Plot car ratings distribution
+    plt.figure(figsize=(10, 5))
+    plt.hist(car_counts, bins=20, color='green', alpha=0.7, label="Ratings per car")
+    plt.xlabel("Number of Ratings")
+    plt.ylabel("Frequency")
+    plt.title("Distribution of Ratings per Car")
+    plt.legend()
+    plt.show()
+
+# Visualize the data
+visualize_data_distribution(df)
+def visualize_data_distribution(df):
+    """
+    Visualize data distribution: number of ratings per user and car.
+    :param df: DataFrame containing the raw data
+    """
+    user_counts = df["user_id"].value_counts()
+    car_counts = df["car_id"].value_counts()
+
+    # Plot user ratings distribution
+    plt.figure(figsize=(10, 5))
+    plt.hist(user_counts, bins=20, color='blue', alpha=0.7, label="Ratings per user")
+    plt.xlabel("Number of Ratings")
+    plt.ylabel("Frequency")
+    plt.title("Distribution of Ratings per User")
+    plt.legend()
+    plt.show()
+
+    # Plot car ratings distribution
+    plt.figure(figsize=(10, 5))
+    plt.hist(car_counts, bins=20, color='green', alpha=0.7, label="Ratings per car")
+    plt.xlabel("Number of Ratings")
+    plt.ylabel("Frequency")
+    plt.title("Distribution of Ratings per Car")
+    plt.legend()
+    plt.show()
+
+# Visualize the data
+visualize_data_distribution(df)
+def visualize_data_distribution(df):
+    """
+    Visualize data distribution: number of ratings per user and car.
+    :param df: DataFrame containing the raw data
+    """
+    user_counts = df["user_id"].value_counts()
+    car_counts = df["car_id"].value_counts()
+
+    # Plot user ratings distribution
+    plt.figure(figsize=(10, 5))
+    plt.hist(user_counts, bins=20, color='blue', alpha=0.7, label="Ratings per user")
+    plt.xlabel("Number of Ratings")
+    plt.ylabel("Frequency")
+    plt.title("Distribution of Ratings per User")
+    plt.legend()
+    plt.show()
+
+    # Plot car ratings distribution
+    plt.figure(figsize=(10, 5))
+    plt.hist(car_counts, bins=20, color='green', alpha=0.7, label="Ratings per car")
+    plt.xlabel("Number of Ratings")
+    plt.ylabel("Frequency")
+    plt.title("Distribution of Ratings per Car")
+    plt.legend()
+    plt.show()
+
+# Visualize the data
+visualize_data_distribution(df)
+  def recommend_by_content(car_id, car_features, num_recommendations=3):
+    """
+    Recommend similar cars based on content features.
+    :param car_id: Target car ID
+    :param car_features: Feature matrix for cars
+    :param num_recommendations: Number of recommendations to return
+    :return: List of recommended car IDs
+    """
+    # Compute cosine similarity
+    car_index = car_features.index.get_loc(car_id)
+    similarity_scores = cosine_similarity([car_features.iloc[car_index]], car_features)[0]
+
+    # Sort cars by similarity
+    similar_cars = np.argsort(similarity_scores)[::-1][1:num_recommendations + 1]
+    return car_features.iloc[similar_cars].index.tolist()
+
+# Example car features (synthetic)
+car_features = pd.DataFrame({
+    "comfort": np.random.rand(50),
+    "luxury": np.random.rand(50),
+    "fuel_efficiency": np.random.rand(50)
+}, index=range(101, 151))
+
+# Test content-based filtering
+recommended_cars = recommend_by_content(101, car_features)
+print("Content-based recommendations:", recommended_cars)
+def recommend_by_content(car_id, car_features, num_recommendations=3):
+    """
+    Recommend similar cars based on content features.
+    :param car_id: Target car ID
+    :param car_features: Feature matrix for cars
+    :param num_recommendations: Number of recommendations to return
+    :return: List of recommended car IDs
+    """
+    # Compute cosine similarity
+    car_index = car_features.index.get_loc(car_id)
+    similarity_scores = cosine_similarity([car_features.iloc[car_index]], car_features)[0]
+
+    # Sort cars by similarity
+    similar_cars = np.argsort(similarity_scores)[::-1][1:num_recommendations + 1]
+    return car_features.iloc[similar_cars].index.tolist()
+
+# Example car features (synthetic)
+car_features = pd.DataFrame({
+    "comfort": np.random.rand(50),
+    "luxury": np.random.rand(50),
+    "fuel_efficiency": np.random.rand(50)
+}, index=range(101, 151))
+
+# Test content-based filtering
+recommended_cars = recommend_by_content(101, car_features)
+print("Content-based recommendations:", recommended_cars)
+from surprise import SVD, Dataset, Reader
+from surprise.model_selection import train_test_split
+
+def collaborative_filtering(df, user_id, top_n=3):
+    """
+    Recommend cars using SVD collaborative filtering.
+    :param df: Raw DataFrame of user-car interactions
+    :param user_id: Target user ID
+    :param top_n: Number of recommendations to return
+    :return: List of recommended car IDs
+    """
+    # Prepare data for Surprise library
+    reader = Reader(rating_scale=(1, 5))
+    data = Dataset.load_from_df(df[["user_id", "car_id", "rating"]], reader)
+    trainset, testset = train_test_split(data, test_size=0.2)
+
+    # Train SVD model
+    svd = SVD()
+    svd.fit(trainset)
+
+    # Predict ratings for all cars for the user
+    car_ids = df["car_id"].unique()
+    predictions = [(car_id, svd.predict(user_id, car_id).est) for car_id in car_ids]
+
+    # Sort by predicted ratings
+    recommendations = sorted(predictions, key=lambda x: x[1], reverse=True)[:top_n]
+    return [car_id for car_id, _ in recommendations]
+
+# Test collaborative filtering
+user_id = 1
+recommended_cars_svd = collaborative_filtering(df, user_id)
+print(f"Collaborative filtering recommendations for user {
+from surprise import SVD, Dataset, Reader
+from surprise.model_selection import train_test_split
+
+def collaborative_filtering(df, user_id, top_n=3):
+    """
+    Recommend cars using SVD collaborative filtering.
+    :param df: Raw DataFrame of user-car interactions
+    :param user_id: Target user ID
+    :param top_n: Number of recommendations to return
+    :return: List of recommended car IDs
+    """
+    # Prepare data for Surprise library
+    reader = Reader(rating_scale=(1, 5))
+    data = Dataset.load_from_df(df[["user_id", "car_id", "rating"]], reader)
+    trainset, testset = train_test_split(data, test_size=0.2)
+
+    # Train SVD model
+    svd = SVD()
+    svd.fit(trainset)
+
+    # Predict ratings for all cars for the user
+    car_ids = df["car_id"].unique()
+    predictions = [(car_id, svd.predict(user_id, car_id).est) for car_id in car_ids]
+
+    # Sort by predicted ratings
+    recommendations = sorted(predictions, key=lambda x: x[1], reverse=True)[:top_n]
+    return [car_id for car_id, _ in recommendations]
+
+# Test collaborative filtering
+user_id = 1
+recommended_cars_svd = collaborative_filtering(df, user_id)
+print(f"Collaborative filtering recommendations for user {
+from surprise import SVD, Dataset, Reader
+from surprise.model_selection import train_test_split
+
+def collaborative_filtering(df, user_id, top_n=3):
+    """
+    Recommend cars using SVD collaborative filtering.
+    :param df: Raw DataFrame of user-car interactions
+    :param user_id: Target user ID
+    :param top_n: Number of recommendations to return
+    :return: List of recommended car IDs
+    """
+    # Prepare data for Surprise library
+    reader = Reader(rating_scale=(1, 5))
+    data = Dataset.load_from_df(df[["user_id", "car_id", "rating"]], reader)
+    trainset, testset = train_test_split(data, test_size=0.2)
+
+    # Train SVD model
+    svd = SVD()
+    svd.fit(trainset)
+
+    # Predict ratings for all cars for the user
+    car_ids = df["car_id"].unique()
+    predictions = [(car_id, svd.predict(user_id, car_id).est) for car_id in car_ids]
+
+    # Sort by predicted ratings
+    recommendations = sorted(predictions, key=lambda x: x[1], reverse=True)[:top_n]
+    return [car_id for car_id, _ in recommendations]
+
+# Test collaborative filtering
+user_id = 1
+recommended_cars_svd = collaborative_filtering(df, user_id)
+print(f"Collaborative filtering recommendations for user {
+from surprise import SVD, Dataset, Reader
+from surprise.model_selection import train_test_split
+
+def collaborative_filtering(df, user_id, top_n=3):
+    """
+    Recommend cars using SVD collaborative filtering.
+    :param df: Raw DataFrame of user-car interactions
+    :param user_id: Target user ID
+    :param top_n: Number of recommendations to return
+    :return: List of recommended car IDs
+    """
+    # Prepare data for Surprise library
+    reader = Reader(rating_scale=(1, 5))
+    data = Dataset.load_from_df(df[["user_id", "car_id", "rating"]], reader)
+    trainset, testset = train_test_split(data, test_size=0.2)
+
+    # Train SVD model
+    svd = SVD()
+    svd.fit(trainset)
+
+    # Predict ratings for all cars for the user
+    car_ids = df["car_id"].unique()
+    predictions = [(car_id, svd.predict(user_id, car_id).est) for car_id in car_ids]
+
+    # Sort by predicted ratings
+    recommendations = sorted(predictions, key=lambda x: x[1], reverse=True)[:top_n]
+    return [car_id for car_id, _ in recommendations]
+
+# Test collaborative filtering
+user_id = 1
+recommended_cars_svd = collaborative_filtering(df, user_id)
+print(f"Collaborative filtering recommendations for user {
+def recommend_by_content(car_id, car_features, num_recommendations=3):
+    """
+    Recommend similar cars based on content features.
+    :param car_id: Target car ID
+    :param car_features: Feature matrix for cars
+    :param num_recommendations: Number of recommendations to return
+    :return: List of recommended car IDs
+    """
+    # Compute cosine similarity
+    car_index = car_features.index.get_loc(car_id)
+    similarity_scores = cosine_similarity([car_features.iloc[car_index]], car_features)[0]
+
+    # Sort cars by similarity
+    similar_cars = np.argsort(similarity_scores)[::-1][1:num_recommendations + 1]
+    return car_features.iloc[similar_cars].index.tolist()
+
+# Example car features (synthetic)
+car_features = pd.DataFrame({
+    "comfort": np.random.rand(50),
+    "luxury": np.random.rand(50),
+    "fuel_efficiency": np.random.rand(50)
+}, index=range(101, 151))
+
+# Test content-based filtering
+recommended_cars = recommend_by_content(101, car_features)
+print("Content-based recommendations:", recommended_cars)
+def recommend_by_content(car_id, car_features, num_recommendations=3):
+    """
+    Recommend similar cars based on content features.
+    :param car_id: Target car ID
+    :param car_features: Feature matrix for cars
+    :param num_recommendations: Number of recommendations to return
+    :return: List of recommended car IDs
+    """
+    # Compute cosine similarity
+    car_index = car_features.index.get_loc(car_id)
+    similarity_scores = cosine_similarity([car_features.iloc[car_index]], car_features)[0]
+
+    # Sort cars by similarity
+    similar_cars = np.argsort(similarity_scores)[::-1][1:num_recommendations + 1]
+    return car_features.iloc[similar_cars].index.tolist()
+
+# Example car features (synthetic)
+car_features = pd.DataFrame({
+    "comfort": np.random.rand(50),
+    "luxury": np.random.rand(50),
+    "fuel_efficiency": np.random.rand(50)
+}, index=range(101, 151))
+
+# Test content-based filtering
+recommended_cars = recommend_by_content(101, car_features)
+print("Content-based recommendations:", recommended_cars)
+def recommend_by_content(car_id, car_features, num_recommendations=3):
+    """
+    Recommend similar cars based on content features.
+    :param car_id: Target car ID
+    :param car_features: Feature matrix for cars
+    :param num_recommendations: Number of recommendations to return
+    :return: List of recommended car IDs
+    """
+    # Compute cosine similarity
+    car_index = car_features.index.get_loc(car_id)
+    similarity_scores = cosine_similarity([car_features.iloc[car_index]], car_features)[0]
+
+    # Sort cars by similarity
+    similar_cars = np.argsort(similarity_scores)[::-1][1:num_recommendations + 1]
+    return car_features.iloc[similar_cars].index.tolist()
+
+# Example car features (synthetic)
+car_features = pd.DataFrame({
+    "comfort": np.random.rand(50),
+    "luxury": np.random.rand(50),
+    "fuel_efficiency": np.random.rand(50)
+}, index=range(101, 151))
+
+# Test content-based filtering
+recommended_cars = recommend_by_content(101, car_features)
+print("Content-based recommendations:", recommended_cars)
+def recommend_by_content(car_id, car_features, num_recommendations=3):
+    """
+    Recommend similar cars based on content features.
+    :param car_id: Target car ID
+    :param car_features: Feature matrix for cars
+    :param num_recommendations: Number of recommendations to return
+    :return: List of recommended car IDs
+    """
+    # Compute cosine similarity
+    car_index = car_features.index.get_loc(car_id)
+    similarity_scores = cosine_similarity([car_features.iloc[car_index]], car_features)[0]
+
+    # Sort cars by similarity
+    similar_cars = np.argsort(similarity_scores)[::-1][1:num_recommendations + 1]
+    return car_features.iloc[similar_cars].index.tolist()
+
+# Example car features (synthetic)
+car_features = pd.DataFrame({
+    "comfort": np.random.rand(50),
+    "luxury": np.random.rand(50),
+    "fuel_efficiency": np.random.rand(50)
+}, index=range(101, 151))
+
+# Test content-based filtering
+recommended_cars = recommend_by_content(101, car_features)
+print("Content-based recommendations:", recommended_cars)
+def recommend_by_content(car_id, car_features, num_recommendations=3):
+    """
+    Recommend similar cars based on content features.
+    :param car_id: Target car ID
+    :param car_features: Feature matrix for cars
+    :param num_recommendations: Number of recommendations to return
+    :return: List of recommended car IDs
+    """
+    # Compute cosine similarity
+    car_index = car_features.index.get_loc(car_id)
+    similarity_scores = cosine_similarity([car_features.iloc[car_index]], car_features)[0]
+
+    # Sort cars by similarity
+    similar_cars = np.argsort(similarity_scores)[::-1][1:num_recommendations + 1]
+    return car_features.iloc[similar_cars].index.tolist()
+
+# Example car features (synthetic)
+car_features = pd.DataFrame({
+    "comfort": np.random.rand(50),
+    "luxury": np.random.rand(50),
+    "fuel_efficiency": np.random.rand(50)
+}, index=range(101, 151))
+
+# Test content-based filtering
+recommended_cars = recommend_by_content(101, car_features)
+print("Content-based recommendations:", recommended_cars)
+def recommend_by_content(car_id, car_features, num_recommendations=3):
+    """
+    Recommend similar cars based on content features.
+    :param car_id: Target car ID
+    :param car_features: Feature matrix for cars
+    :param num_recommendations: Number of recommendations to return
+    :return: List of recommended car IDs
+    """
+    # Compute cosine similarity
+    car_index = car_features.index.get_loc(car_id)
+    similarity_scores = cosine_similarity([car_features.iloc[car_index]], car_features)[0]
+
+    # Sort cars by similarity
+    similar_cars = np.argsort(similarity_scores)[::-1][1:num_recommendations + 1]
+    return car_features.iloc[similar_cars].index.tolist()
+
+# Example car features (synthetic)
+car_features = pd.DataFrame({
+    "comfort": np.random.rand(50),
+    "luxury": np.random.rand(50),
+    "fuel_efficiency": np.random.rand(50)
+}, index=range(101, 151))
+
+# Test content-based filtering
+recommended_cars = recommend_by_content(101, car_features)
+print("Content-based recommendations:", recommended_cars)
+# Import necessary libraries
+import pandas as pd
+import numpy as np
+import random
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.preprocessing import MinMaxScaler
+import matplotlib.pyplot as plt
+
+# Seed for reproducibility
+random.seed(42)
+
+# Utility functions for data generation and visualization
+def generate_synthetic_data(num_users=100, num_cars=50, max_rating=5):
+    """
+    Generate synthetic car rental data for the recommender system.
+    :param num_users: Number of users
+    :param num_cars: Number of cars
+    :param max_rating: Maximum rating a user can give
+    :return: DataFrame of synthetic data
+    """
+    data = {
+        "user_id": np.random.randint(1, num_users + 1, size=500),
+        "car_id": np.random.randint(101, 101 + num_cars, size=500),
+        "rating": np.random.randint(1, max_rating + 1, size=500)
+    }
+    return pd.DataFrame(data)
+
+# Generate synthetic data
+df = generate_synthetic_data()
+# Import necessary libraries
+import pandas as pd
+import numpy as np
+import random
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.preprocessing import MinMaxScaler
+import matplotlib.pyplot as plt
+
+# Seed for reproducibility
+random.seed(42)
+
+# Utility functions for data generation and visualization
+def generate_synthetic_data(num_users=100, num_cars=50, max_rating=5):
+    """
+    Generate synthetic car rental data for the recommender system.
+    :param num_users: Number of users
+    :param num_cars: Number of cars
+    :param max_rating: Maximum rating a user can give
+    :return: DataFrame of synthetic data
+    """
+    data = {
+        "user_id": np.random.randint(1, num_users + 1, size=500),
+        "car_id": np.random.randint(101, 101 + num_cars, size=500),
+        "rating": np.random.randint(1, max_rating + 1, size=500)
+    }
+    return pd.DataFrame(data)
+
+# Generate synthetic data
+df = generate_synthetic_data()
+# Import necessary libraries
+import pandas as pd
+import numpy as np
+import random
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.preprocessing import MinMaxScaler
+import matplotlib.pyplot as plt
+
+# Seed for reproducibility
+random.seed(42)
+
+# Utility functions for data generation and visualization
+def generate_synthetic_data(num_users=100, num_cars=50, max_rating=5):
+    """
+    Generate synthetic car rental data for the recommender system.
+    :param num_users: Number of users
+    :param num_cars: Number of cars
+    :param max_rating: Maximum rating a user can give
+    :return: DataFrame of synthetic data
+    """
+    data = {
+        "user_id": np.random.randint(1, num_users + 1, size=500),
+        "car_id": np.random.randint(101, 101 + num_cars, size=500),
+        "rating": np.random.randint(1, max_rating + 1, size=500)
+    }
+    return pd.DataFrame(data)
+
+# Generate synthetic data
+df = generate_synthetic_data()
+# Import necessary libraries
+import pandas as pd
+import numpy as np
+import random
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.preprocessing import MinMaxScaler
+import matplotlib.pyplot as plt
+
+# Seed for reproducibility
+random.seed(42)
+
+# Utility functions for data generation and visualization
+def generate_synthetic_data(num_users=100, num_cars=50, max_rating=5):
+    """
+    Generate synthetic car rental data for the recommender system.
+    :param num_users: Number of users
+    :param num_cars: Number of cars
+    :param max_rating: Maximum rating a user can give
+    :return: DataFrame of synthetic data
+    """
+    data = {
+        "user_id": np.random.randint(1, num_users + 1, size=500),
+        "car_id": np.random.randint(101, 101 + num_cars, size=500),
+        "rating": np.random.randint(1, max_rating + 1, size=500)
+    }
+    return pd.DataFrame(data)
+
+# Generate synthetic data
+df = generate_synthetic_data()
+# Import necessary libraries
+import pandas as pd
+import numpy as np
+import random
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.preprocessing import MinMaxScaler
+import matplotlib.pyplot as plt
+
+# Seed for reproducibility
+random.seed(42)
+
+# Utility functions for data generation and visualization
+def generate_synthetic_data(num_users=100, num_cars=50, max_rating=5):
+    """
+    Generate synthetic car rental data for the recommender system.
+    :param num_users: Number of users
+    :param num_cars: Number of cars
+    :param max_rating: Maximum rating a user can give
+    :return: DataFrame of synthetic data
+    """
+    data = {
+        "user_id": np.random.randint(1, num_users + 1, size=500),
+        "car_id": np.random.randint(101, 101 + num_cars, size=500),
+        "rating": np.random.randint(1, max_rating + 1, size=500)
+    }
+    return pd.DataFrame(data)
+
+# Generate synthetic data
+df = generate_synthetic_data()
+# Import necessary libraries
+import pandas as pd
+import numpy as np
+import random
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.preprocessing import MinMaxScaler
+import matplotlib.pyplot as plt
+
+# Seed for reproducibility
+random.seed(42)
+
+# Utility functions for data generation and visualization
+def generate_synthetic_data(num_users=100, num_cars=50, max_rating=5):
+    """
+    Generate synthetic car rental data for the recommender system.
+    :param num_users: Number of users
+    :param num_cars: Number of cars
+    :param max_rating: Maximum rating a user can give
+    :return: DataFrame of synthetic data
+    """
+    data = {
+        "user_id": np.random.randint(1, num_users + 1, size=500),
+        "car_id": np.random.randint(101, 101 + num_cars, size=500),
+        "rating": np.random.randint(1, max_rating + 1, size=500)
+    }
+    return pd.DataFrame(data)
+
+# Generate synthetic data
+df = generate_synthetic_data()
+def preprocess_data(df):
+    """
+    Preprocess the data for the recommendation system.
+    - Handle missing values.
+    - Normalize ratings.
+
+    :param df: DataFrame containing the raw data
+    :return: Preprocessed user-item matrix
+    """
+    # Create user-item matrix
+    user_item_matrix = df.pivot(index="user_id", columns="car_id", values="rating").fillna(0)
+    return user_item_matrix
+
+# Preprocess the data
+user_item_matrix = preprocess_data(df)
+def preprocess_data(df):
+    """
+    Preprocess the data for the recommendation system.
+    - Handle missing values.
+    - Normalize ratings.
+
+    :param df: DataFrame containing the raw data
+    :return: Preprocessed user-item matrix
+    """
+    # Create user-item matrix
+    user_item_matrix = df.pivot(index="user_id", columns="car_id", values="rating").fillna(0)
+    return user_item_matrix
+
+# Preprocess the data
+user_item_matrix = preprocess_data(df)
+def preprocess_data(df):
+    """
+    Preprocess the data for the recommendation system.
+    - Handle missing values.
+    - Normalize ratings.
+
+    :param df: DataFrame containing the raw data
+    :return: Preprocessed user-item matrix
+    """
+    # Create user-item matrix
+    user_item_matrix = df.pivot(index="user_id", columns="car_id", values="rating").fillna(0)
+    return user_item_matrix
+
+# Preprocess the data
+user_item_matrix = preprocess_data(df)
